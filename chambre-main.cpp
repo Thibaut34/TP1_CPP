@@ -4,7 +4,8 @@
 
 
 int main(){
-	chambre::Chambre premiere(1, "single" , 100);
+	Chambre premiere(1, "single" , 100);
+	std::cout<< premiere << std::endl;
 	premiere.getidentifiant();
 	premiere.gettype();
 	premiere.getprix();
