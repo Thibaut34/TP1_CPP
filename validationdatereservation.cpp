@@ -7,74 +7,64 @@
 #include "client.h"
 #include <vector>
 
+int nbjourdsmois(int month , int year){
+	if( (month == 1 || month == 3 || month == 5 || month == 7|| month == 8 || month == 10 || month == 12) ){
+		return 31;
+	}
+	else if ((month == 4 || month == 6 || month == 9 || month == 11)){
+		return 30;
+	}
+	else if((month==2)&&(year%4==0)){
+		return 29;
+	}
+	else if((month==2)&&(year%4!=0)){
+		return 28;
+	}
+	else 
+		std::cout<<"date impossible\n";
+	return 0;
+};
+
+
+void nombredenuit(Date datededebut ,Date datedefin){
+	int nbdemois=(datedefin.month() - datededebut.month());
+	int nbdenuit;
+
+	if(nbdemois>1){
+		nbdenuit=(nbjourdsmois(datededebut.month() , datededebut.year())-datededebut.day());
+		for(int i=1; i<(nbdemois); i++){
+			int compteur;
+			int nombredemois=(datededebut.month()+i);
+			compteur=nbjourdsmois(nombredemois, datededebut.year());
+			nbdenuit+=compteur;
+
+		}
+		nbdenuit+=datedefin.day();
+	}
+	else if(nbdemois==1){
+		nbdenuit=(nbjourdsmois(datededebut.month() , datededebut.year())-datededebut.day());
+		nbdenuit+=datedefin.day();
+
+	}
+	else 
+		nbdenuit=datedefin.day()-datededebut.day();
+
+	std::cout << "vous passerez: " << nbdenuit << " nuits dans l'hotel" << std::endl;
+}	;
 
 
 
+bool checkdatereservationvalides(Date datedebut , Date datedefin ){
+	bool status;
+	if ((datedebut<=datedefin)==1){
+		status=true;
+	}
+	else
+		status=false;
+	return status;
+}
 
 int main(){
-
-//debut partie;creation hotel 
-
-	std::vector<Chambre> nombredechambre;
-	Hotel2 hotel2("hotel1", "intercontinental" ,"Marseille" ,nombredechambre);
-
-	hotel2.remplir(10);
-
-
-Chambre type1 (0 , "single" ,100);
-Chambre type2 (0, "double" ,125);
-Chambre type3 (0 ,"suite" ,210);
-
-
-	for (int i=0 ; i<10 ; i++){
-		if (i>=0 && i<=2){
-			type1.setidentifiant(i);
-			hotel2.setTabChambre(i ,type1);
-
-		}
-		else if(i>=3 && i<=7){
-			type2.setidentifiant(i);
-			hotel2.setTabChambre(i, type2);
-		}
-		else if(i>=8 && i<=9){
-			type3.setidentifiant(i);
-			hotel2.setTabChambre(i, type3);
-		}
-
-	};
-
-std::cout << hotel2.GetTabChambre()<< std::endl;
-
-
-std::cout << hotel2 << std::endl;
-
-
-//fin partie::creation hotel
-//partie liste de client
-
-
-
-
-
-	std::vector<Client> listeclient;
-	std::cout<< "combien de client voulez vous creer \n";
-	int y;
-	std::cin>>y;
-	for(int i=0 ; i<y; i++){
-		int idreservation;
-		idreservation=rand();
-		std::string nom, prenom;
-		std::cout << "remplir votre votre nom et votre prenom \n";
-		std::cin>> nom	>> prenom  ;
-		Client test(i ,nom , prenom , idreservation);
-		listeclient.push_back(test);
-	}
-	std::cout << listeclient << std::endl;
-
-//fin de la partie:liste de client 
-//debut partie validation des dates du sejour
-
-
 	Date datedebut , datedefin ;
 	int year , month, day; 
 	std::cout <<"renseigner les dates de debut du sejour (au format (year/month/day) \n";
@@ -104,9 +94,6 @@ std::cout << hotel2 << std::endl;
 
 	std::cout<<"les dates sont valides merci \n";
 	nombredenuit(datedebut1, datedefin1);
-
-
-//fin de la partie: validation des dates du sejour
 
 	return 0;
 }
