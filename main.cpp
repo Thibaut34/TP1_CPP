@@ -72,10 +72,19 @@ std::cout << hotel2 << std::endl;
 	std::cout << listeclient << std::endl;
 
 //fin de la partie:liste de client 
+
+
+
+
+
+
+// creation d'u tableau contenant toutes les reservations 
+	std::vector<Reservation> tblreservation;
+
 //debut partie validation des dates du sejour
 
 
-	Date datedebut , datedefin ;
+	Date datedebutsejour , datefinsejour ;
 	int year , month, day; 
 	std::cout <<"renseigner les dates de debut du sejour (au format (year/month/day) \n";
 	std::cin>>year >> month >> day ;
@@ -99,14 +108,98 @@ std::cout << hotel2 << std::endl;
 		datedefin1.setDay(day);
 		test =checkdatereservationvalides(datedebut1 , datedefin1);
 	};
-	datedebut=datedebut1;
-	datedefin=datedefin1;
+	datedebutsejour=datedebut1;
+	datefinsejour=datedefin1;
 
 	std::cout<<"les dates sont valides merci \n";
 	nombredenuit(datedebut1, datedefin1);
 
 
 //fin de la partie: validation des dates du sejour
+
+
+Date firsttest(2020, 1, 1) , firsttest2(2020,1,5), firsttest3(2020,1,14), firsttest4(2020,1,8);
+	Reservation first(132 , firsttest ,firsttest2 ,hotel2.GetId(), 0 , 17 ,0);
+	Reservation second(133 , firsttest ,firsttest4 ,hotel2.GetId(), 1 , 21 ,0);
+	Reservation third(134 , firsttest2 ,firsttest3 ,hotel2.GetId(), 2 , 54, 0);
+	Reservation quatre(152, firsttest ,firsttest2 ,hotel2.GetId() , 8 ,45421 ,0);
+	tblreservation.push_back(first);
+	tblreservation.push_back(second);
+	tblreservation.push_back(third);
+	tblreservation.push_back(quatre);
+
+
+
+
+
+
+
+
+//debut de la partie choix des chambres
+			//permet de saisir le type de cambre souhaite
+	std::string type;
+	std::cout << "quel type de chambre desirez-vous (single, double ,suite) \n";
+	std::cin>> type;
+	std::cout <<"vous avez choisis une chambre: " << type << std::endl;
+	//
+
+
+
+
+		//verification de la disponibilite de la chambre dans le tableau de reservation
+		std::vector<Chambre> tblchambre;
+		int informateur , identifiantchambre , prixdelachambre;
+		int idnouvellereservation2;
+		tblchambre=hotel2.GetTabChambre();
+		for(int i=0 ; i<tblchambre.size() ; i++){ 
+			if (informateur<=2){ 
+	  			if (tblchambre[i].gettype()==type){
+	  				prixdelachambre=tblchambre[i].getprix();
+	  				informateur=1;
+  				for(int y=0 ; y<tblreservation.size() ; y++) {
+						if(tblreservation[y].getidchambre()==tblchambre[i].getidentifiant()){ 
+							Date datedebtbl, datefintbl;
+							datedebtbl=tblreservation[y].getdatededebut();
+							datefintbl=tblreservation[y].getdatedefin();
+
+							if((datefinsejour<=datedebtbl) || (datedebutsejour>=datefintbl) ){
+								informateur=3;
+								identifiantchambre=(tblchambre[i]).getidentifiant();
+							}
+							else if((datedebutsejour>=datedebtbl && datedebutsejour<=datefintbl)||(datefinsejour>=datedebtbl && datefinsejour<=datefintbl)||(datedebtbl>=datedebutsejour) && (datedebtbl<=datefinsejour) || (datefintbl>=datedebutsejour) && (datefintbl<= datefinsejour)){ 
+								informateur=2;
+							}
+						}
+				}
+				
+					if (informateur==1){
+						identifiantchambre=tblchambre[i].getidentifiant();
+						informateur=4;
+					}
+		  	}
+		  }
+
+
+		}
+		if(informateur==2){
+					std::cout << "desole aucune chambre du type "<< type<< " disponible pour les dates que vous avez indique , essayez avec un autre type de chambre \n";
+				}
+		else if ((informateur==4) || (informateur==3)){ 
+			std::cout <<"votre reservation a bien été pris en compte. vous avez donc reserver une chambre de type" << type << "lidentifiant de la chambre est: " << identifiantchambre << ",le prix par nuit de cette chambre est de: " << prixdelachambre << "euros " << 	std::endl;
+			idnouvellereservation2=rand();
+			Reservation nouvellereservation(idnouvellereservation2 ,datedebutsejour ,datefinsejour, hotel2.GetId() , identifiantchambre, listeclient[0].GetId(), 0.0 );
+			tblreservation.push_back(nouvellereservation);
+
+		}	
+		else if (informateur==0){
+			std::cout<< "ce type ( " << type << ") de chambre n'existe pas essayez avec un des types de chambre proposé dans la liste. Merci \n";
+		}
+
+		std::cout<< tblreservation <<  std::endl;
+
+
+
+
 
 	return 0;
 }
