@@ -88,16 +88,12 @@ int year , month ,day;
 	int idnouvellereservation2;
 	tblchambre=hotel2.GetTabChambre();
 	for(int i=0 ; i<tblchambre.size() ; i++){ 
-		//jusque ici tout a l'air de fonctionner
 		if (informateur<=2){ 
 	  		if (tblchambre[i].gettype()==type){
-	  			//tout fonctionne
 	  			prixdelachambre=tblchambre[i].getprix();
 	  			informateur=1;
   				for(int y=0 ; y<tblreservation.size() ; y++) {
- 					//tout fonctionne
 					if(tblreservation[y].getidchambre()==tblchambre[i].getidentifiant()){ 
-						//tout fonctionne
 						Date datedebtbl, datefintbl;
 						datedebtbl=tblreservation[y].getdatededebut();
 						datefintbl=tblreservation[y].getdatedefin();
@@ -105,12 +101,10 @@ int year , month ,day;
 						if((datefinsejour<=datedebtbl) || (datedebutsejour>=datefintbl) ){
 							informateur=3;
 							identifiantchambre=(tblchambre[i]).getidentifiant();
-							std::cout <<"salut c'est moi " <<  informateur << std::endl;
 
 							}
 						else if((datedebutsejour>=datedebtbl && datedebutsejour<=datefintbl)||(datefinsejour>=datedebtbl && datefinsejour<=datefintbl)||(datedebtbl>=datedebutsejour) && (datedebtbl<=datefinsejour) || (datefintbl>=datedebutsejour) && (datefintbl<= datefinsejour)){ 
 							informateur=2;
-							std::cout << "salut c'est encore moi" << informateur << std::endl;
 						}
 					}
 			}
@@ -119,7 +113,7 @@ int year , month ,day;
 					identifiantchambre=tblchambre[i].getidentifiant();
 					informateur=4;
 				}
-	  	}//tout fonctionne
+	  	}
 	  }
 
 
@@ -147,8 +141,6 @@ int year , month ,day;
 
 	std::cout<< tblreservation <<  std::endl;
 
-
-	std::cout << tblchambre << std::endl;
 
 			
 	return 0;
