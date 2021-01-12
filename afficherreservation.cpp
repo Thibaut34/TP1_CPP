@@ -10,7 +10,6 @@
 
 
 
-
 int main(){
 
 //debut partie;creation hotel 
@@ -201,6 +200,11 @@ Date firsttest(2020, 1, 1) , firsttest2(2020,1,5), firsttest3(2020,1,14), firstt
 	}
 
 	std::cout<< tblreservation <<  std::endl;
+
+	//
+
+	afficherreservation(132, tblreservation);
+
 
 
 

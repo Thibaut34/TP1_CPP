@@ -10,20 +10,19 @@
 
 
 
-
 int main(){
 
-//debut partie;creation hotel 
+
 
 	std::vector<Chambre> nombredechambre;
-	Hotel2 hotel2("hotel1", "intercontinental" ,"Marseille" ,nombredechambre);
+	Hotel2 hotel2("hotel2", "intercontinental" ,"Marseille" ,nombredechambre);
 
 	hotel2.remplir(10);
 
 
-Chambre type1 (0 , "single" ,100);
-Chambre type2 (0, "double" ,125);
-Chambre type3 (0 ,"suite" ,210);
+	Chambre type1 (0 , "single" ,100);
+	Chambre type2 (0, "double" ,125);
+	Chambre type3 (0 ,"suite" ,210);
 
 
 	for (int i=0 ; i<10 ; i++){
@@ -43,82 +42,21 @@ Chambre type3 (0 ,"suite" ,210);
 
 	};
 
-std::cout << hotel2.GetTabChambre()<< std::endl;
+	//std::cout << hotel2.GetTabChambre()<< std::endl;
 
 
-std::cout << hotel2 << std::endl;
-
-
-//fin partie::creation hotel
-//partie liste de client
+	//std::cout << hotel2 << std::endl;
 
 
 
+//creation d'un client
+	int idnouveauclient=rand();
+	Client client1(idnouveauclient ,"arhi",  "KDa" ,0 );
 
 
-	std::vector<Client> listeclient;
-	std::cout<< "combien de client voulez vous creer \n";
-	int y;
-	std::cin>>y;
-	for(int i=0 ; i<y; i++){
-		int idreservation;
-		idreservation=rand();
-		std::string nom, prenom;
-		std::cout << "remplir votre votre nom et votre prenom \n";
-		std::cin>> nom	>> prenom  ;
-		Client test(i ,nom , prenom , idreservation);
-		listeclient.push_back(test);
-	}
-	std::cout << listeclient << std::endl;
-
-//fin de la partie:liste de client 
-
-
-
-
-
-
-// creation d'u tableau contenant toutes les reservations 
+//creation d'un tableau de reservation
 	std::vector<Reservation> tblreservation;
-
-//debut partie validation des dates du sejour
-
-
-	Date datedebutsejour , datefinsejour ;
-	int year , month, day; 
-	std::cout <<"renseigner les dates de debut du sejour (au format (year/month/day) \n";
-	std::cin>>year >> month >> day ;
-	Date datedebut1(year, month,day);
-	std::cout <<"renseigner les dates de fin du sejour (au format (year/month/day) \n";
-	std::cin>>year >> month >> day ;
-	Date datedefin1(year, month,day);
-	bool test =checkdatereservationvalides(datedebut1 , datedefin1);
-
-	while(test==false){
-		std::cout <<"les dates ne sont pas valides ressayer s'il vous plait \n";
-		std::cout <<"renseigner les dates de debut du sejour (au format (year/month/day) \n";
-		std::cin>>year >> month >> day ;
-		datedebut1.setYear(year);
-		datedebut1.setMonth(month);
-		datedebut1.setDay(day);
-		std::cout <<"renseigner les dates de fin du sejour (au format (year/month/day) \n";
-		std::cin>>year >> month >> day ;
-		datedefin1.setYear(year);
-		datedefin1.setMonth(month);
-		datedefin1.setDay(day);
-		test =checkdatereservationvalides(datedebut1 , datedefin1);
-	};
-	datedebutsejour=datedebut1;
-	datefinsejour=datedefin1;
-
-	std::cout<<"les dates sont valides merci \n";
-	nombredenuit(datedebutsejour, datefinsejour);
-
-
-//fin de la partie: validation des dates du sejour
-
-
-Date firsttest(2020, 1, 1) , firsttest2(2020,1,5), firsttest3(2020,1,14), firsttest4(2020,1,8);
+	Date firsttest(2020, 1, 1) , firsttest2(2020,1,5), firsttest3(2020,1,14), firsttest4(2020,1,8);
 	Reservation first(132 , firsttest ,firsttest2 ,hotel2.GetId(), 0 , 17 ,0);
 	Reservation second(133 , firsttest ,firsttest4 ,hotel2.GetId(), 1 , 21 ,0);
 	Reservation third(134 , firsttest2 ,firsttest3 ,hotel2.GetId(), 2 , 54, 0);
@@ -129,25 +67,28 @@ Date firsttest(2020, 1, 1) , firsttest2(2020,1,5), firsttest3(2020,1,14), firstt
 	tblreservation.push_back(quatre);
 
 
-
-
-
-
-
-
-//debut de la partie choix des chambres
-			//permet de saisir le type de cambre souhaite
+	//permet de saisir le type de cambre souhaite
 	std::string type;
-	std::cout << "quel type de chambre desirez-vous (single, double ,suite) \n";
+	std::cout << "quel type de chambre desirez-vous (Single, Double ,Suite) \n";
 	std::cin>> type;
 	std::cout <<"vous avez choisis une chambre: " << type << std::endl;
 	//
 
 
+	//demande de dates de reservation
 
-//verification de la disponibilite de la chambre dans le tableau de reservation
+int year , month ,day;
+	std::cout <<"quelles sont les dates de votre sejour (\n";
+	std::cout<<"date d'arrivée (annee , mois , jour \n";
+	std::cin>>year >>month >> day;
+	Date datedebutsejour(year, month , day);
+	std::cout<<"date de départ (annee , mois, jour \n";
+	std::cin>>year>> month >> day ;
+	Date datefinsejour(year , month , day);
+
+	//verification de la disponibilite de la chambre dans le tableau de reservation
 	std::vector<Chambre> tblchambre;
-	int informateur=0 , identifiantchambre , prixdelachambre;
+	int informateur , identifiantchambre , prixdelachambre;
 	int idnouvellereservation2;
 	tblchambre=hotel2.GetTabChambre();
 	for(int i=0 ; i<tblchambre.size() ; i++){ 
@@ -178,24 +119,28 @@ Date firsttest(2020, 1, 1) , firsttest2(2020,1,5), firsttest3(2020,1,14), firstt
 				}
 	  	}
 	  }
+
+
+
+
+
+
+
+
+
 	}
-
-
 	if(informateur==2){
 				std::cout << "desole aucune chambre du type "<< type<< " disponible pour les dates que vous avez indique , essayez avec un autre type de chambre \n";
 			}
 	else if ((informateur==4) || (informateur==3)){ 
-		std::cout << "" << std::endl;
 		std::cout <<"votre reservation a bien été pris en compte. vous avez donc reserver une chambre de type" << type << "lidentifiant de la chambre est: " << identifiantchambre << ",le prix par nuit de cette chambre est de: " << prixdelachambre << "euros " << 	std::endl;
 		idnouvellereservation2=rand();
-		Reservation nouvellereservation(idnouvellereservation2 ,datedebutsejour ,datefinsejour, hotel2.GetId() , identifiantchambre, listeclient[0].GetId(), 0.0 );
-		std::cout << "les informaions de la reservation sont " << nouvellereservation << std::endl;
+		Reservation nouvellereservation(idnouvellereservation2 ,datedebutsejour ,datefinsejour, hotel2.GetId() , identifiantchambre, client1.GetId(), 0.0 );
 		tblreservation.push_back(nouvellereservation);
 		double prixfinal=prixtotalsejour(datedebutsejour,datefinsejour, prixdelachambre);
-		std::cout<< "le prix final du sejour est de " << prixfinal << "euros" << std::endl;
-		std::cout << "" << std::endl;
+		std::cout<< "le prix final du sejour est" << prixfinal << std::endl;
 
-		}	
+	}
 	else if (informateur==0){
 		std::cout<< "ce type ( " << type << ") de chambre n'existe pas essayez avec un des types de chambre proposé dans la liste. Merci \n";
 	}
@@ -203,6 +148,10 @@ Date firsttest(2020, 1, 1) , firsttest2(2020,1,5), firsttest3(2020,1,14), firstt
 	std::cout<< tblreservation <<  std::endl;
 
 
-
 	return 0;
+
 }
+
+
+
+
