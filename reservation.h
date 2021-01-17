@@ -5,6 +5,7 @@
 #include "chambre.h"
 #include "client.h"
 #include "hotel.h"
+#include "hotel2.h"
 
 
 	class Reservation
@@ -37,6 +38,22 @@
 	};	
 
 
+std::ostream& operator<<(std::ostream& os,  Reservation reservationtest);
+
+std::ostream& operator<<(std::ostream& os, const std::vector<Reservation>& listeReservation) ;
+
+double prixtotalsejour(Date datededebut ,Date datedefin, double prix);
+
+void afficherreservation(int identreservation, std::vector<Reservation> tableaureservation);
+
+void afficherreservation2(std::string nom , std::string prenom , int id , std::vector<Reservation> tableaureservation, std::vector<Client> listeclient);
+
+
+void validationresa(Hotel2 hotel2 ,Client client1 ,std::vector<Reservation> tblreservation , std::string type , Date datedebutsejour , Date datefinsejour);
+
+
 
 #endif 
+
+
 //creation de la clase reservation en utilisant les classe chambre et date deja existante

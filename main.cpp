@@ -145,64 +145,16 @@ Date firsttest(2020, 1, 1) , firsttest2(2020,1,5), firsttest3(2020,1,14), firstt
 
 
 
-//verification de la disponibilite de la chambre dans le tableau de reservation
-	std::vector<Chambre> tblchambre;
-	int informateur=0 , identifiantchambre , prixdelachambre;
-	int idnouvellereservation2;
-	tblchambre=hotel2.GetTabChambre();
-	for(int i=0 ; i<tblchambre.size() ; i++){ 
-		if (informateur<=2){ 
-	  		if (tblchambre[i].gettype()==type){
-	  			prixdelachambre=tblchambre[i].getprix();
-	  			informateur=1;
-  				for(int y=0 ; y<tblreservation.size() ; y++) {
-					if(tblreservation[y].getidchambre()==tblchambre[i].getidentifiant()){ 
-						Date datedebtbl, datefintbl;
-						datedebtbl=tblreservation[y].getdatededebut();
-						datefintbl=tblreservation[y].getdatedefin();
-
-						if((datefinsejour<=datedebtbl) || (datedebutsejour>=datefintbl) ){
-							informateur=3;
-							identifiantchambre=(tblchambre[i]).getidentifiant();
-
-							}
-						else if((datedebutsejour>=datedebtbl && datedebutsejour<=datefintbl)||(datefinsejour>=datedebtbl && datefinsejour<=datefintbl)||(datedebtbl>=datedebutsejour) && (datedebtbl<=datefinsejour) || (datefintbl>=datedebutsejour) && (datefintbl<= datefinsejour)){ 
-							informateur=2;
-						}
-					}
-			}
-			
-				if (informateur==1){
-					identifiantchambre=tblchambre[i].getidentifiant();
-					informateur=4;
-				}
-	  	}
-	  }
-	}
+//verification de la disponibilite de la chambre dans le tableau de reservation (question 10 incluse)
+validationresa( hotel2 ,listeclient[0], tblreservation ,type , datedebutsejour ,datefinsejour);
 
 
-	if(informateur==2){
-				std::cout << "desole aucune chambre du type "<< type<< " disponible pour les dates que vous avez indique , essayez avec un autre type de chambre \n";
-			}
-	else if ((informateur==4) || (informateur==3)){ 
-		std::cout << "" << std::endl;
-		std::cout <<"votre reservation a bien été pris en compte. vous avez donc reserver une chambre de type" << type << "lidentifiant de la chambre est: " << identifiantchambre << ",le prix par nuit de cette chambre est de: " << prixdelachambre << "euros " << 	std::endl;
-		idnouvellereservation2=rand();
-		Reservation nouvellereservation(idnouvellereservation2 ,datedebutsejour ,datefinsejour, hotel2.GetId() , identifiantchambre, listeclient[0].GetId(), 0.0 );
-		std::cout << "les informaions de la reservation sont " << nouvellereservation << std::endl;
-		tblreservation.push_back(nouvellereservation);
-		double prixfinal=prixtotalsejour(datedebutsejour,datefinsejour, prixdelachambre);
-		std::cout<< "le prix final du sejour est de " << prixfinal << "euros" << std::endl;
-		std::cout << "" << std::endl;
+//question 11
+//a)
+	std::cout<< tblreservation << std::endl;
 
-		}	
-	else if (informateur==0){
-		std::cout<< "ce type ( " << type << ") de chambre n'existe pas essayez avec un des types de chambre proposé dans la liste. Merci \n";
-	}
-
-	std::cout<< tblreservation <<  std::endl;
-
-
+//b)
+	afficherreservation(132, tblreservation);
 
 	return 0;
 }
