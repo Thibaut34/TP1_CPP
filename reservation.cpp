@@ -132,7 +132,7 @@ std::ostream& operator<<(std::ostream& os, const std::vector<Reservation>& liste
 }
 
 
-//Calcul le prix total du sejour
+
 double prixtotalsejour(Date datededebut ,Date datedefin, double prix){
 	int nbdemois=(datedefin.month() - datededebut.month());
 	int nbdenuit;
@@ -162,6 +162,17 @@ double prixtotalsejour(Date datededebut ,Date datedefin, double prix){
 }	
 
 
+
+void afficherreservation(int identreservation, std::vector<Reservation> tableaureservation){
+	auto it=tableaureservation.begin();
+	while(it!=tableaureservation.end()){
+		if ((*it).getidreservation()==identreservation){
+			std::cout << *it << std::endl;
+			it=tableaureservation.end();
+		}
+		it++;
+	}
+}
 
 
 
@@ -208,12 +219,7 @@ void afficherreservation2(std::string nom , std::string prenom , int id , std::v
 
 
 
-/*question 8 + question 10)b)
-parcours le tableau des chambre puis etudie pour chaques chambre du type demandé parcours le tableau des reservation pour voir si elle est disponible au dates demandées 
-si elle n'est pas disponible au date demande la fonction affiche un message d'erreur
-si elle est disponible un message de confirmation apparait , la reservation est enregistrée dans le tableau des reservations et des informations sur la reservation sont affichées
-si le type demandé n'existe pas un message d'erreur apparait 
-*/
+
 void validationresa(Hotel2 hotel2 ,Client client1 ,std::vector<Reservation>& tblreservation , std::string type , Date datedebutsejour , Date datefinsejour){
 	std::vector<Chambre> tblchambre;
 	int informateur=0 , identifiantchambre , prixdelachambre;
@@ -272,36 +278,7 @@ void validationresa(Hotel2 hotel2 ,Client client1 ,std::vector<Reservation>& tbl
 
 }
 
-//fin de la question 8
 
-
-
-
-
-//question 11) a)
-void affichertoutelesresa(std::vector<Reservation> tblreservation){
-	std::cout<<tblreservation<<std::endl;
-}
-
-//fin qestion 11)a)
-
-//question 11)b)
-
-void afficherreservation(int identreservation, std::vector<Reservation> tableaureservation){
-	auto it=tableaureservation.begin();
-	while(it!=tableaureservation.end()){
-		if ((*it).getidreservation()==identreservation){
-			std::cout << *it << std::endl;
-			it=tableaureservation.end();
-		}
-		it++;
-	}
-}
-
-//fin question 11)b)
-
-
-//quesiton 11)c)
 
 
 void afficherresa(int idclient,  std::vector<Reservation> tableaureservation){
@@ -315,7 +292,17 @@ void afficherresa(int idclient,  std::vector<Reservation> tableaureservation){
 }
 
 
+/*
 
+void afficherresa(int idclient, std::vector<Reservation> tblreservation){
+	for(int i=0 ; i<tblreservation.size() ; i++){
+		std::cout << "salut" << std::endl; 
+		if ((tblreservation[i].getidclient())==idclient){
+			std::cout << tblreservation[i] << std::endl;;
+		}
+	}
+}
+*/
 
 void afficherresanom(std::string nom , std::string prenom ,std::vector<Reservation>  tableaureservation ,std::vector<Client>  listeclient){
 	auto it3=listeclient.begin();
@@ -334,10 +321,10 @@ void afficherresanom(std::string nom , std::string prenom ,std::vector<Reservati
 		it2++;
 	}
 }
-//fin de la question 11)c)
 
 
-//question 11)d)
+
+
 void Reservation:: modifyreservationbyhotel(int idreservation, Date datededebut , Date datedefin,  std::string idhotel , int idchambre ,int idclient ,double total){
 	if(idreservation!=-1){
 		_idreservation=idreservation;
@@ -360,5 +347,7 @@ void Reservation:: modifyreservationbyhotel(int idreservation, Date datededebut 
 		_total=total;
 	}
 }
-//fin question 11)d)
+
+
+
 

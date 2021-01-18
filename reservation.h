@@ -54,7 +54,7 @@ void afficherreservation(int identreservation, std::vector<Reservation> tableaur
 void afficherreservation2(std::string nom , std::string prenom , int id , std::vector<Reservation> tableaureservation, std::vector<Client> listeclient);
 
 
-void validationresa(Hotel2 hotel2 ,Client client1 ,std::vector<Reservation>& tblreservation , std::string type , Date datedebutsejour , Date datefinsejour);
+bool validationresa(Hotel2 hotel2 ,Client client1 ,std::vector<Reservation>& tblreservation , std::string type , Date datedebutsejour , Date datefinsejour);
 
 void afficherresa(int idclient, std::vector<Reservation> tblreservation);
 

@@ -36,3 +36,26 @@ std::ostream& operator<<(std::ostream& os, const std::vector<Client>& listeclien
 	os << std::endl;
 	return os;
 }
+
+
+
+
+Client choixclient(std::string nom , std::vector<Client> listedeclient){
+    std::string prenom;
+    std::vector<Client> listedesnoms;
+    auto it=listedeclient.begin();
+    while( it!=listedeclient.end()){
+        if((*it).GetNom()==nom){
+            listedesnoms.push_back((*it));
+        }
+        it++;
+    }
+    std::cout<< listedesnoms << std::endl;
+    std::cout<<"renseigner votre prenom s'il vous plait \n";
+    std::cin>> prenom;
+    auto it2=listedesnoms.begin();
+    while((*it2).GetPrenom()!=prenom){
+        it2++;
+    }
+    return (*it2);
+}
