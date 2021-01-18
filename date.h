@@ -35,6 +35,7 @@
    void nombredenuit(Date datededebut ,Date datedefin);
    bool checkdatereservationvalides(Date datedebut , Date datedefin );
 
+//   void setdate ( Date dateachanger , int year , int month , int day);
 
 
 #endif // DATE_H

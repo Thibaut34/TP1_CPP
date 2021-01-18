@@ -27,6 +27,11 @@
 			double montanttotal(Date datededebut ,Date datedefin, double prixparnuit , double reduc);
 			void setprixtotal(double prix);
 			std::string toString(Date dateaafficher) const;
+			void setidresa(int idreservation);
+			void setidhotel(std::string idhotel);
+			void modifyreservationbyhotel(int idreservation, Date datededebut , Date datedefin,  std::string idhotel , int idchambre ,int idclient ,double total);
+
+
 			
 		private:
 			int _idreservation , _idchambre ,_idclient ;
@@ -49,8 +54,13 @@ void afficherreservation(int identreservation, std::vector<Reservation> tableaur
 void afficherreservation2(std::string nom , std::string prenom , int id , std::vector<Reservation> tableaureservation, std::vector<Client> listeclient);
 
 
-void validationresa(Hotel2 hotel2 ,Client client1 ,std::vector<Reservation> tblreservation , std::string type , Date datedebutsejour , Date datefinsejour);
+void validationresa(Hotel2 hotel2 ,Client client1 ,std::vector<Reservation>& tblreservation , std::string type , Date datedebutsejour , Date datefinsejour);
 
+void afficherresa(int idclient, std::vector<Reservation> tblreservation);
+
+void afficherresanom(std::string nom , std::string prenom ,std::vector<Reservation>  tblreservation ,std::vector<Client>  listeclient);
+
+void supresa(std::vector<Reservation> tblreservation , int idreservation);
 
 
 #endif 

@@ -6,9 +6,6 @@
 int main(){
 	Chambre premiere(1, "single" , 100);
 	std::cout<< premiere << std::endl;
-	premiere.getidentifiant();
-	premiere.gettype();
-	premiere.getprix();
 	std:: cout << premiere.getidentifiant() <<"/" << premiere.gettype() <<"/"<<premiere.getprix() << std ::endl;
 	premiere.setidentifiant(50);
 	premiere.settype("double");

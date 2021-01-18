@@ -225,3 +225,16 @@ bool checkdatereservationvalides(Date datedebut , Date datedefin ){
 		status=false;
 	return status;
 }
+
+
+/*
+ void setdate ( Date dateachanger , int year , int month , int day){
+ 	if(Date::checkDate(year, month ,day)){
+ 		dateachanger.setYear(year);
+ 		dateachanger.setMonth(month);
+ 		dateachanger.setDay(day);
+ 	}
+ }
+ */
+
+
