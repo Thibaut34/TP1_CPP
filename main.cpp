@@ -84,7 +84,7 @@ std::cout << hotel2 << std::endl;
 //debut partie validation des dates du sejour
 
 
-	Date datedebutsejour , datefinsejour ;
+/*	Date datedebutsejour , datefinsejour ;
 	int year , month, day; 
 	std::cout <<"renseigner les dates de debut du sejour (au format (year/month/day) \n";
 	std::cin>>year >> month >> day ;
@@ -113,7 +113,7 @@ std::cout << hotel2 << std::endl;
 
 	std::cout<<"les dates sont valides merci \n";
 	nombredenuit(datedebutsejour, datefinsejour);
-
+*/
 
 //fin de la partie: validation des dates du sejour
 
@@ -137,24 +137,86 @@ Date firsttest(2020, 1, 1) , firsttest2(2020,1,5), firsttest3(2020,1,14), firstt
 
 //debut de la partie choix des chambres
 			//permet de saisir le type de cambre souhaite
-	std::string type;
+	/*std::string type;
 	std::cout << "quel type de chambre desirez-vous (single, double ,suite) \n";
 	std::cin>> type;
 	std::cout <<"vous avez choisis une chambre: " << type << std::endl;
 	//
+*/
 
+std::vector<Reservation>& tblreservationref = tblreservation ;
 
 
 //verification de la disponibilite de la chambre dans le tableau de reservation (question 10 incluse)
-validationresa( hotel2 ,listeclient[0], tblreservation ,type , datedebutsejour ,datefinsejour);
+
+for (int i=0 ; i<listeclient.size() ; i++){
+		std::string type;
+		std::cout << "quel type de chambre desirez-vous (single, double ,suite) \n";
+		std::cin>> type;
+		std::cout <<"vous avez choisis une chambre: " << type << std::endl;
 
 
-//question 11
-//a)
-	std::cout<< tblreservation << std::endl;
 
-//b)
+//question 7
+
+		Date datedebutsejour , datefinsejour ;
+		int year , month, day; 
+		std::cout <<"renseigner les dates de debut du sejour (au format (year/month/day) \n";
+		std::cin>>year >> month >> day ;
+		Date datedebut1(year, month,day);
+		std::cout <<"renseigner les dates de fin du sejour (au format (year/month/day) \n";
+		std::cin>>year >> month >> day ;
+		Date datedefin1(year, month,day);
+		bool test =checkdatereservationvalides(datedebut1 , datedefin1);
+
+		while(test==false){
+			std::cout <<"les dates ne sont pas valides ressayer s'il vous plait \n";
+			std::cout <<"renseigner les dates de debut du sejour (au format (year/month/day) \n";
+			std::cin>>year >> month >> day ;
+			datedebut1.setYear(year);
+			datedebut1.setMonth(month);
+			datedebut1.setDay(day);
+			std::cout <<"renseigner les dates de fin du sejour (au format (year/month/day) \n";
+			std::cin>>year >> month >> day ;
+			datedefin1.setYear(year);
+			datedefin1.setMonth(month);
+			datedefin1.setDay(day);
+			test =checkdatereservationvalides(datedebut1 , datedefin1);
+		};
+		datedebutsejour=datedebut1;
+		datefinsejour=datedefin1;
+
+		std::cout<<"les dates sont valides merci \n";
+		nombredenuit(datedebutsejour, datefinsejour);
+		//fin de la question 7
+//
+		//
+
+
+		validationresa( hotel2 ,listeclient[i], tblreservationref ,type , datedebutsejour ,datefinsejour);
+
+	}
+
+
+
+ 	affichertoutelesresa(tblreservation);
+
+
+
+	afficherresa( listeclient[1].GetId() , tblreservation);
+
+	afficherresanom( "salomo" , "Jacques", tblreservation , listeclient  );
+//
 	afficherreservation(132, tblreservation);
+
+	Date one(2020, 2, 1);
+	Date two(2020, 5, 15);
+
+	std::cout<< tblreservation[1]<<std::endl;
+	tblreservation[1].modifyreservationbyhotel(5, one , two ,"salut", 50,151,2000);
+	std::cout << tblreservation[1] <<std::endl;
+
+
 
 	return 0;
 }
